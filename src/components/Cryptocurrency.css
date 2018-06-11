@@ -1,0 +1,53 @@
+/*
+=======================
+COIN sectoin
+=======================
+*/
+.coin {
+    width: auto;
+    background-color: var(--coin-bg-color);
+    box-shadow: 2px 2px 10px rgb(156, 156, 156);
+    /* border-radius: 5px; */
+    text-align: left;
+    border-bottom: 1px dashed rgb(1, 1, 107);
+    margin: 1px;
+    padding: 10px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 250px 100px 250px repeat(3, 100px);
+    grid-template-areas: 
+        "name rank price h day week";
+    transition: all .2s ease-in-out;
+    color: var(--text-color);
+}
+
+.coin:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    font-size: 2em;
+}
+
+.name {
+    text-align: left;
+}
+
+.coin-table-title {
+    color: var(--title-color);
+    position: fixed;
+    background-color: var(--title-bg-color);
+    width: 60%;
+    align-items: center;
+    text-align: left;
+    height: 50px;
+    display: grid;
+    grid-template-columns: 250px 100px 250px repeat(3, 100px);
+    grid-template-areas: 
+        "name rank price h day week";
+    font-weight: 700;
+    justify-self: center;
+    grid-gap: 10px;
+}
+
+.center {
+    text-align: center;
+}

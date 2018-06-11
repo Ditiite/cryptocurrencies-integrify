@@ -1,0 +1,114 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-family: var(--font);
+}
+
+:root {
+    --font: 'Work Sans', sans-serif;
+    --btn-bg-color: rgb(255, 216, 132);
+    --coin-bg-color: rgb(253, 252, 251);
+    --title-color: rgb(253, 174, 5);
+    --title-bg-color: rgba(99, 98, 98, 0.9);
+    --text-color: rgb(94, 93, 93);
+}
+
+body{
+    /* background-image: linear-gradient(to bottom,rgba(122, 122, 122, 0.3), rgba(253, 174, 5, 0.4)), url('../images/b9.jpg'); */
+    background-image: linear-gradient(to bottom,rgba(122, 122, 122, 0.7), rgba(0, 38, 142, 0.4)), url('./images/b12.jpg');
+    /* background-image: linear-gradient(to bottom,rgba(209, 210, 211, 0.3), rgba(0, 23, 86, 0.9)), url('../images/bitcoin.jpg'); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    text-align: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 10px;
+    background-color: transparent;
+}
+
+.container-fixed-position {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+        "title total search";
+    position: fixed;
+    /* justify-items: center; */
+    align-items: center;
+    min-width: 100%;
+    height: 160px;
+    padding: 15px 15px 0 15px;
+    background-color: var(--title-bg-color);
+}
+
+.title {
+    grid-area: title;
+    justify-self: center; 
+    font-size: 4em; 
+    color: var(--title-color);
+}
+
+.total-amount {
+    grid-area: total;
+    color: rgb(223, 224, 224);
+}
+
+.search-bar {
+    grid-area: search;
+    justify-self: left;
+}
+
+.details {
+    margin-top: 100px;
+    text-align: left;
+    grid-column: 1 / -1;
+}
+
+.coin-title {
+    display: grid;
+    grid-template-columns:  1fr;
+    grid-column: 1 / -1;
+    margin-top: 170px;
+    width:  60%;
+    justify-self: center;
+    grid-gap: 10px; 
+}
+
+.coin-table {
+    position: fixed;
+    width: 100%;
+}
+
+.coin-table-title {
+    color: var(--title-color);
+    position: fixed;
+    background-color: var(--title-bg-color);
+    width: 60%;
+    align-items: center;
+    text-align: left;
+    height: 50px;
+    display: grid;
+    grid-template-columns: 250px 100px 250px repeat(3, 100px);
+    grid-template-areas: 
+        "name rank price h day week";
+    font-weight: 700;
+    justify-self: center;
+    grid-gap: 10px;
+}
+/* 	
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+} */

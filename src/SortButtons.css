@@ -1,0 +1,27 @@
+/*
+==========================
+SORTING BUTTONS
+==========================
+*/
+.sorting-btns {
+    width: 60%;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.sorting-btns button {
+    background-color: var(--btn-bg-color);
+    border: none;
+    margin: 1px;
+    padding: 10px;
+    text-transform: uppercase;
+    widows: 25%;    
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.chart-down {
+    width: 23px;
+    margin-bottom: -5px;
+}
