@@ -4,7 +4,7 @@ SORTING BUTTONS
 ==========================
 */
 .sorting-btns {
-    width: 60%;
+    width: 970px;
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);

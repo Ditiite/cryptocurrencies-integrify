@@ -11,9 +11,9 @@ export class Tickers extends Component {
 
         return(
             <div className="tickers-container">
-                <ul className="tickers">
+                <div className="tickers">
                     {tickers}
-                </ul>
+                </div>
             </div>
         );
     }

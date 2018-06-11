@@ -23,8 +23,9 @@ class App extends Component {
         });
     }
 
+    //Fetching data from API
     componentDidMount() {
-        fetch('https://api.coinmarketcap.com/v1/ticker/?limit=10')
+        fetch('https://api.coinmarketcap.com/v1/ticker/?limit=2000')
             .then(results => {
                 return results.json();
             }).then(data => {
@@ -34,28 +35,44 @@ class App extends Component {
             });
     }
 
+    //Sort by price ascending
     sortByPriceAsc() {
         const sorted = this.state.data.sort((a, b) => (
             parseFloat(b.price_usd) - parseFloat(a.price_usd)
         ));
 
         this.setState({
-            data: sorted
+            data: sorted,
+            query: ''
         });
     }
 
+    //Sort by price descending
     sortByPriceDesc() {
         const sorted = this.state.data.sort((a, b) => (
             parseFloat(a.price_usd) - parseFloat(b.price_usd)
         ));
         this.setState({
-            data: sorted
+            data: sorted,
+            query: ''
         });
     }
 
+    //Sort by rank
+    sortByRank() {
+        const sorted = this.state.data.sort((a, b) => (
+            parseFloat(a.rank) - parseFloat(b.rank)
+        ));
+        this.setState({
+            data: sorted,
+            query: ''
+        });
+    }
+    
+
     render() {
         let showData;
-
+        //Showing data according to input field
         if (this.state.query) {
             const match = new RegExp(escapeRegExp(this.state.query), 'i')
             showData = this.state.data.filter((currency) => match.test(currency.name));
@@ -72,15 +89,25 @@ class App extends Component {
                     <h1 className="title">Cryptocurrencies</h1>
                     <div className="search-bar">
                         <input
+                            type="text"
                             name="search"
-                            placeholder="Please insert patern"
+                            placeholder="Please insert pattern"
                             value={this.state.query}
                             onChange={(event) => this.updateQuery(event.target.value)}
                         />
                     </div>
-                    <p className="total-amount">Total amount of cryptocurrency coins
-                        <span className="total-num"></span>
-                    </p>
+
+                    {/* Check the length of the data */}
+                    
+                        {showData.length !== this.state.data.length && (
+                            <p className="total-amount">
+                                Found match - 
+                                {' '  + showData.length} out of -
+                                {' '  + this.state.data.length}
+                                
+                            </p>
+                        )}
+                        
 
                 </div>
                 <div className="coin-title">
@@ -89,14 +116,19 @@ class App extends Component {
                             {/* <button onClick={this.sortByName} className="sort-btn-name">Sort by name 
                                 <i className="fas fa-sort-alpha-down"></i></button> */}
                             <button
-                                onClick={ () => this.sortByPriceAsc() }
+                                onClick={() => this.sortByPriceDesc()} 
                                 className="sort-btn-price-lowest">Sort by price
                                 <i className="fas fa-chart-line"></i>
                             </button>
-                            <button onClick={() => this.sortByPriceDesc()} className="sort-btn-price-higest">Sort by price
-                                <img className="chart-down" src={chartDown} alt="chart arrow going down" />
+                            <button 
+                                onClick={ () => this.sortByPriceAsc() }
+                                className="sort-btn-price-higest">Sort by price
+                                <img className="chart-down" 
+                                src={chartDown} alt="chart arrow going down" />
                             </button>
-                            <button className="sort-btn-rank">Sort by rank 
+                            <button 
+                                onClick={ () => this.sortByRank() }
+                                className="sort-btn-rank">Sort by rank 
                                 <i className="fas fa-sort-numeric-down"></i>
                             </button>
                         </div>
