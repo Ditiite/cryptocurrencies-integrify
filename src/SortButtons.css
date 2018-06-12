@@ -7,7 +7,7 @@ SORTING BUTTONS
     width: 970px;
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .sorting-btns button {
@@ -16,7 +16,6 @@ SORTING BUTTONS
     margin: 1px;
     padding: 10px;
     text-transform: uppercase;
-    widows: 25%;    
     cursor: pointer;
     color: var(--text-color);
 }

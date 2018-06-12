@@ -2,19 +2,26 @@ import React, { Component } from 'react';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
 
-import { Tickers } from "./components/Tickers";
+import { Currency } from "./components/Currency";
 
+import { Buttons } from "./components/Buttons";
 import "./SortButtons.css";
 import './App.css';
 
-import chartDown from "./images/chartDown.png";
-
 class App extends Component {
-    
-    state = {
-        query: '',
-        data: []
+    constructor(props) {
+        super(props)
+        this.sortByName = this.sortByName.bind(this);
+        this.sortByPriceDesc = this.sortByPriceDesc.bind(this);
+        this.sortByPriceAsc = this.sortByPriceAsc.bind(this);
+        this.sortByRank = this.sortByRank.bind(this);
+        
+        this.state = {
+            query: '',
+            data: []
+        }
     }
+    
 
     // For input search field
     updateQuery = (query) => {
@@ -69,6 +76,13 @@ class App extends Component {
         });
     }
     
+    sortByName() {
+        const sorted = this.state.data.sort(sortBy('name'));
+        this.setState({
+            data: sorted,
+            query: ''
+        });
+    }
 
     render() {
         let showData;
@@ -79,8 +93,6 @@ class App extends Component {
         } else {
             showData = this.state.data
         }
-
-        //showData.sort(sortBy('name'));
 
         return (
             <div className="container">
@@ -112,26 +124,13 @@ class App extends Component {
                 </div>
                 <div className="coin-title">
                     <div className="coin-table">
-                        <div className="sorting-btns">
-                            {/* <button onClick={this.sortByName} className="sort-btn-name">Sort by name 
-                                <i className="fas fa-sort-alpha-down"></i></button> */}
-                            <button
-                                onClick={() => this.sortByPriceDesc()} 
-                                className="sort-btn-price-lowest">Sort by price
-                                <i className="fas fa-chart-line"></i>
-                            </button>
-                            <button 
-                                onClick={ () => this.sortByPriceAsc() }
-                                className="sort-btn-price-higest">Sort by price
-                                <img className="chart-down" 
-                                src={chartDown} alt="chart arrow going down" />
-                            </button>
-                            <button 
-                                onClick={ () => this.sortByRank() }
-                                className="sort-btn-rank">Sort by rank 
-                                <i className="fas fa-sort-numeric-down"></i>
-                            </button>
-                        </div>
+                        <Buttons 
+                            data={this.state.data}
+                            sortByPriceDesc = {this.sortByPriceDesc}
+                            sortByPriceAsc = {this.sortByPriceAsc}
+                            sortByRank = {this.sortByRank}
+                            sortByName = {this.sortByName}
+                        />
 
                         <div className="coin-table-title">
                             <p className="center">Name</p>
@@ -144,7 +143,7 @@ class App extends Component {
                     </div>
 
                     <section className="details">
-                        <Tickers data={showData} />
+                        <Currency data={showData} />
                     </section>
 
                 </div>

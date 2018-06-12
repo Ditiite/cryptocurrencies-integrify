@@ -35,7 +35,7 @@ COIN sectoin
     color: var(--title-color);
     position: fixed;
     background-color: var(--title-bg-color);
-    width: 60%;
+    width: 970px;
     align-items: center;
     text-align: left;
     height: 50px;

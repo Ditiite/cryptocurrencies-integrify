@@ -85,22 +85,6 @@ body{
     width: 970px;
 }
 
-.coin-table-title {
-    color: var(--title-color);
-    position: fixed;
-    background-color: var(--title-bg-color);
-    width: 970pxs;
-    align-items: center;
-    text-align: left;
-    height: 50px;
-    display: grid;
-    grid-template-columns: 250px 100px 250px repeat(3, 100px);
-    grid-template-areas: 
-        "name rank price h day week";
-    font-weight: 700;
-    justify-self: center;
-    grid-gap: 10px;
-}
 /* 	
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
