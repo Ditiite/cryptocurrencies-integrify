@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
 
-import { Currency } from "./components/Currency";
+import { Currency } from './components/Currency';
 
-import { Buttons } from "./components/Buttons";
-import "./SortButtons.css";
+import { Buttons } from './components/Buttons';
+import './SortButtons.css';
 import './App.css';
+import './components/Loader.css';
 
 class App extends Component {
     constructor(props) {
@@ -18,7 +19,8 @@ class App extends Component {
         
         this.state = {
             query: '',
-            data: []
+            data: [], //will hold data from fetch call
+            loading: false //change to true when data is loaded
         }
     }
     
@@ -32,14 +34,17 @@ class App extends Component {
 
     //Fetching data from API
     componentDidMount() {
-        fetch('https://api.coinmarketcap.com/v1/ticker/?limit=2000')
+        this.setState({ loading: true }, () => {
+            fetch('https://api.coinmarketcap.com/v1/ticker/?limit=2000')
             .then(results => {
                 return results.json();
             }).then(data => {
                 this.setState({
+                    loading: false,
                     data: data
                 });
             });
+        })
     }
 
     //Sort by price ascending
@@ -94,6 +99,8 @@ class App extends Component {
             showData = this.state.data
         }
 
+        const { data, loading } = this.state;
+
         return (
             <div className="container">
                 {/* Check if geting any data from input field -> {JSON.stringify(this.state)} */}
@@ -110,18 +117,23 @@ class App extends Component {
                     </div>
 
                     {/* Check the length of the data */}
+                    {showData.length !== this.state.data.length && (
+                        <p className="total-amount">
+                            Found match - 
+                            {' '  + showData.length} out of -
+                            {' '  + this.state.data.length}
+                        </p>
+                    )}
                     
-                        {showData.length !== this.state.data.length && (
-                            <p className="total-amount">
-                                Found match - 
-                                {' '  + showData.length} out of -
-                                {' '  + this.state.data.length}
-                                
-                            </p>
-                        )}
-                        
-
                 </div>
+                {/* If data loading show loader else show data */}
+                { loading ? 
+                <div className="loader-container">
+                    <div class="loader">
+                        <div class="loader-abs"></div> 
+                        <div class="loader-abs"></div>
+                    </div>
+                </div> :
                 <div className="coin-title">
                     <div className="coin-table">
                         <Buttons 
@@ -146,7 +158,7 @@ class App extends Component {
                         <Currency data={showData} />
                     </section>
 
-                </div>
+                </div> }
             </div>
         );
     }
