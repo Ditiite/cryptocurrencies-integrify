@@ -3,8 +3,9 @@ import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
 
 import { Currency } from './components/Currency';
-
+import TableTitle from './components/TableTitle';
 import { Buttons } from './components/Buttons';
+import Loader from './components/Loader';
 import './SortButtons.css';
 import './App.css';
 import './components/Loader.css';
@@ -24,7 +25,6 @@ class App extends Component {
         }
     }
     
-
     // For input search field
     updateQuery = (query) => {
         this.setState({ 
@@ -81,6 +81,7 @@ class App extends Component {
         });
     }
     
+    //Sorts by name
     sortByName() {
         const sorted = this.state.data.sort(sortBy('name'));
         this.setState({
@@ -100,13 +101,14 @@ class App extends Component {
         }
 
         const { data, loading } = this.state;
-
+        
         return (
             <div className="container">
-                {/* Check if geting any data from input field -> {JSON.stringify(this.state)} */}
-                <div className="container-fixed-position">
+                {/* Check if geting any data from input field ->  */}
+                <header className="container-fixed-position">
                     <h1 className="title">Cryptocurrencies</h1>
                     <div className="search-bar">
+                    
                         <input
                             type="text"
                             name="search"
@@ -124,16 +126,10 @@ class App extends Component {
                             {' '  + this.state.data.length}
                         </p>
                     )}
-                    
-                </div>
+                </header>
                 {/* If data loading show loader else show data */}
                 { loading ? 
-                <div className="loader-container">
-                    <div class="loader">
-                        <div class="loader-abs"></div> 
-                        <div class="loader-abs"></div>
-                    </div>
-                </div> :
+                <Loader /> :
                 <div className="coin-title">
                     <div className="coin-table">
                         <Buttons 
@@ -143,15 +139,7 @@ class App extends Component {
                             sortByRank = {this.sortByRank}
                             sortByName = {this.sortByName}
                         />
-
-                        <div className="coin-table-title">
-                            <p className="center">Name</p>
-                            <p>Rank</p>
-                            <p>Price</p>
-                            <p>% 1h</p>
-                            <p>% 24h</p>
-                            <p>% 7d</p>
-                        </div>
+                        <TableTitle />
                     </div>
 
                     <section className="details">

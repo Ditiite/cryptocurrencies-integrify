@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import chartDown from "../images/chartDown.png";
 
 export class Buttons extends Component {
-    constructor(props) {
-        super(props);
-
-    }
 
     render() {
         return(
