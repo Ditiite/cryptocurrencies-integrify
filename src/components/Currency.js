@@ -7,7 +7,7 @@ export class Currency extends Component {
         const currency = this.props.data.map((currency) => 
             <Cryptocurrency data={currency} key={currency.id} />
         );
-
+        // console.log(currency);
         return(
             <div className="currency-container">
                 <div className="currency">
