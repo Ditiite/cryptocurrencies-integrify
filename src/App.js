@@ -49,7 +49,8 @@ class App extends Component {
 
     //Sort by price ascending
     sortByPriceAsc() {
-        const sorted = this.state.data.sort((a, b) => (
+        const sortAsc = [...this.state.data]
+        const sorted = sortAsc.sort((a, b) => (
             parseFloat(b.price_usd) - parseFloat(a.price_usd)
         ));
 
@@ -61,7 +62,8 @@ class App extends Component {
 
     //Sort by price descending
     sortByPriceDesc() {
-        const sorted = this.state.data.sort((a, b) => (
+        const sortDesc = [...this.state.data]
+        const sorted = sortDesc.sort((a, b) => (
             parseFloat(a.price_usd) - parseFloat(b.price_usd)
         ));
         this.setState({
@@ -72,7 +74,8 @@ class App extends Component {
 
     //Sort by rank
     sortByRank() {
-        const sorted = this.state.data.sort((a, b) => (
+        const sortRank = [...this.state.data]
+        const sorted = sortRank.sort((a, b) => (
             parseFloat(a.rank) - parseFloat(b.rank)
         ));
         this.setState({
@@ -83,7 +86,8 @@ class App extends Component {
     
     //Sorts by name
     sortByName() {
-        const sorted = this.state.data.sort(sortBy('name'));
+        const sortName = [...this.state.data]
+        const sorted = sortName.sort(sortBy('name'));
         this.setState({
             data: sorted,
             query: ''
@@ -100,11 +104,12 @@ class App extends Component {
             showData = this.state.data
         }
 
-        const { data, loading } = this.state;
+        const { loading } = this.state;
         
         return (
             <div className="container">
                 {/* Check if geting any data from input field ->  */}
+
                 <header className="container-fixed-position">
                     <h1 className="title">Cryptocurrencies</h1>
                     <div className="search-bar">
@@ -127,6 +132,7 @@ class App extends Component {
                         </p>
                     )}
                 </header>
+
                 {/* If data loading show loader else show data */}
                 { loading ? 
                 <Loader /> :
